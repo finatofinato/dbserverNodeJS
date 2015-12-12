@@ -2,7 +2,8 @@ var CONFIGS = {
   URL_DB  : 'mongodb://localhost:27017/dbserver',
   TABELAS : {
       RESTAURANTE : 'restaurantes',
-      VOTACAO : 'votacaos'
+      VOTACAO : 'votacaos',
+      RESULTADOS : 'resultadoss'
   }
 };
 

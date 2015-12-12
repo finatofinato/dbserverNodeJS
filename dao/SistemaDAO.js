@@ -50,9 +50,9 @@ var SistemaDAO = {
     
     pesquisar : function(tabela, itemJson, callback) {
 		MongoClient.connect(urldb, function(err, db) {
-console.log("itemJson : " + JSON.stringify(itemJson));
+//console.log("itemJson : " + JSON.stringify(itemJson));
             db.collection(tabela).find(itemJson).toArray(function(err, items) {
-                console.log("items.length: " + items.length);
+//console.log("items.length: " + items.length);
                 callback(JSON.stringify(items));
             });
 		});
