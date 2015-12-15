@@ -7,7 +7,7 @@ var SistemaDAO = require('./dao/SistemaDAO.js');
 var SistemaSetup = require('./SistemaSetup.js');
 
 var routesConfig = function(app) {
-    app.route('/sistema/restaurante')
+    app.route('/restaurante')
           .get(function(request, response) {
             SistemaDAO.listar(SistemaSetup.TABELAS.RESTAURANTE, function(result) {
                 //console.log(result); //tojson
@@ -21,7 +21,7 @@ var routesConfig = function(app) {
             });
           });
 
-   app.route('/sistema/restaurante/:id')
+   app.route('/restaurante/:id')
          .delete(function(request, response) {
                 var idString = request.params.id;
                 SistemaDAO.excluir(SistemaSetup.TABELAS.RESTAURANTE, idString, function(result) {
@@ -36,7 +36,7 @@ var routesConfig = function(app) {
             });
           });
 
-    app.route('/sistema/restaurantes/pesquisar')
+    app.route('/restaurantes/pesquisar')
           .post(function(request, response) {
             SistemaDAO.pesquisar(SistemaSetup.TABELAS.RESTAURANTE, request.body, function(result) {
                 response.send(result);

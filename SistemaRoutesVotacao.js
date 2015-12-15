@@ -8,7 +8,7 @@ var SistemaSetup = require('./SistemaSetup.js');
 var urldb = require('./SistemaSetup.js').URL_DB;
 
 var routesConfig = function(app) {
-    app.route('/sistema/votacao')
+    app.route('/votacao')
           .get(function(request, response) {
             SistemaDAO.listar(SistemaSetup.TABELAS.VOTACAO, function(result) {
                 //console.log(result); //tojson
@@ -22,7 +22,7 @@ var routesConfig = function(app) {
             });
           });
 
-   app.route('/sistema/votacao/:id')
+   app.route('/votacao/:id')
          .delete(function(request, response) {
                 var idString = request.params.id;
                 SistemaDAO.excluir(SistemaSetup.TABELAS.VOTACAO, idString, function(result) {
@@ -37,14 +37,14 @@ var routesConfig = function(app) {
             });
           });
 
-    app.route('/sistema/votacaos/pesquisar')
+    app.route('/votacaos/pesquisar')
           .post(function(request, response) {
             SistemaDAO.pesquisar(SistemaSetup.TABELAS.VOTACAO, request.body, function(result) {
                 response.send(result);
             });
           });
     
-    app.route('/sistema/votacaos/restaurantesJaUtilizados')
+    app.route('/votacaos/restaurantesJaUtilizados')
       .post(function(request, response) {
             var callback = function(result) {
                 response.send(result);
@@ -82,7 +82,28 @@ var routesConfig = function(app) {
                 ).toArray(execSql);
             });
       });
+    
+    app.route('/votacaos/resultados')
+      .post(function(request, response) {
+            var callback = function(result) {
+                response.send(result);
+            };
 
+            MongoClient.connect(urldb, function(err, db) {
+                var itemJson = request.body;            
+                db.collection(SistemaSetup.TABELAS.RESULTADOS).find({data:{$gt:itemJson.data}})
+                    .toArray(function(err, items) {
+                        callback(JSON.stringify(items)); 
+                    });
+            });
+      });
+    
+    app.route('/votacaos/resultado')
+      .post(function(request, response) {
+            SistemaDAO.inserir(SistemaSetup.TABELAS.RESULTADOS, request.body, function(result) {
+                response.send(result);
+            });
+          });
     
 };//fim routesconfig
 
