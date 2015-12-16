@@ -1,4 +1,4 @@
-//create the database with the name you want (here is 'dbserver')
+//create the database with the name 'dbserver'
 use dbserver
 
 //create the collections below
@@ -23,8 +23,18 @@ resultados
 	restaurante (id, nome)
 
 
+//if you don't have already installed, do it:
+sudo brew install nodejs
+sudo npm install bower
+sudo npm install grunt-cli
+
+//to update the required dependencies 
+npm install
+bower install
+
 //run with node
 node SistemaServer.js
 
 //all the routes (rest) are in the SistemaRoutes*.js files
 //you can test them with POSTMAN or something like that, all with json format
+//on address http://localhost:9009/
